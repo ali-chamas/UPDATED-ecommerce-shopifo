@@ -1,4 +1,4 @@
-import { client } from "@/sanity/lib/client"
+import { client } from "../../../backend/client"
 import { groq } from "next-sanity"
 
 import { SanityProduct } from "@/config/inventory"

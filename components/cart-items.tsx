@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { urlForImage } from "@/sanity/lib/image"
+import { urlForImage } from "@/config/image"
 import { Clock, X } from "lucide-react"
 import { formatCurrencyString, useShoppingCart } from "use-shopping-cart"
 import { Product } from "use-shopping-cart/core"
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import { CartItemsEmpty } from "@/components/cart-items-empty"
-import { product } from "@/sanity/schemas/product-schema"
+
 
 export function CartItems() {
 
