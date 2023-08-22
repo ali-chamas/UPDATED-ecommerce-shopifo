@@ -23,10 +23,11 @@ interface Props {
 
 export default async function Page({searchParams}:Props) {
 
-  const {  price , color , category,size,search}=searchParams;
+  const {  price , color , category,size,search,date}=searchParams;
   const priceOrder=price ? `| order(price ${price})`:""
   
-  const order = `${priceOrder}`
+  const dateOrder=date ? `| order(_createdAt ${date})`:""
+  const order = `${priceOrder}${dateOrder}`
 
   const productFilter = `_type == "product"`
   const colorFilter = color ?`&& "${color}" in colors` : ""
