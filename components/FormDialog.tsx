@@ -95,7 +95,7 @@ let temple=''
           </DialogContentText>
           
             
-          <form className='my-5 flex flex-col gap-4 items-center' >
+          <form className=' flex  flex-col my-5 gap-4 items-center' >
            
 
             <input type="text"  className='bg-white border border-gray-400 w-full p-3 hover:border-blue-500 transition-all duration-400' placeholder='Full name'
