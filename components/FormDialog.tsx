@@ -41,9 +41,9 @@ let temple=''
 
   const orders=()=>{
     let finalTotal = 0;
-    item.item.map((items:CartItemDetails,index:number)=>{
+    item.item.map((items:any,index:number)=>{
 
-        temple=temple +'\n'+ ('item : '+ Number(index+1)+'\n'+'name : '+ items.name+'\nprice : '+formatCurrencyString({  value:items.price,currency:"USD"})+'\nquantity: '+items.quantity+'\ntotal price :'+formatCurrencyString({  value:items.value,currency:"USD"}))+'\n\n\n'
+        temple=temple +'\n'+ ('item : '+ Number(index+1)+'\n'+'name : '+ items.name+'\nslug : '+items.slug+'\nprice : '+formatCurrencyString({  value:items.price,currency:"USD"})+'\nquantity: '+items.quantity+'\ntotal price :'+formatCurrencyString({  value:items.value,currency:"USD"}))+'\n\n\n'
 
         finalTotal=finalTotal+Number(items.value);
     })
