@@ -30,13 +30,13 @@ const sortOptions = [
 export function ProductSort() {
   const router = useRouter()
   return (
-    <div className="flex items-center">
-      <Select onValueChange={value => router.replace(value)}>
-        <SelectTrigger className="sm:w-[180px]">
+    <div className="flex items-center  ">
+      <Select onValueChange={value => router.replace(value)}  >
+        <SelectTrigger className=" sm:w-[180px]">
           <SelectValue placeholder="Sort By" />
         </SelectTrigger>
         <SelectContent>{sortOptions.map((option)=>(
-          <SelectItem key={option.name} value={option.value}
+          <SelectItem key={option.name} value={option.value} 
 >{option.name}</SelectItem>        ))}</SelectContent>
       </Select>
       <Sheet>

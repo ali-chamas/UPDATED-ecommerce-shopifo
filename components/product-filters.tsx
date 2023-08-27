@@ -65,7 +65,7 @@ export function ProductFilters() {
               </span>
             </AccordionTrigger>
             <AccordionContent>
-              <div className="space-y-4">
+              <div className="space-y-4 ">
                 {section.options.map((option,index) => (
                   <div
                     key={option.value}

@@ -9,14 +9,12 @@ interface Props {
   }
 }
 
-export default async function Page({searchParams}:Props) {
-  const sessionId=searchParams?.session_id ?? ""
-  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
-  const customerDetails=checkoutSession?.customer_details
+export default async function Page() {
+  
   return (
     <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center">
-        <CheckoutSession customerDetails={customerDetails}/>
+        <CheckoutSession/>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Link
             href="/"

@@ -1,10 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Loader2 } from "lucide-react"
+
 import { formatCurrencyString, useShoppingCart } from "use-shopping-cart"
 
-import { Button } from "@/components/ui/button"
+
+import FormDialog from "./FormDialog";
+
 
 export function CartSummary() {
   const {formattedTotalPrice,totalPrice,cartDetails,cartCount,redirectToCheckout}=useShoppingCart()
@@ -14,24 +16,9 @@ export function CartSummary() {
 const [isLoading,setIsLoading]=useState(false)
 const isDisabled = isLoading || cartCount! ===0
 
-  async function onCheckout() {
-    setIsLoading(true)
-    const response = await fetch('/api/checkout',{
-      method:"POST",
-      body:JSON.stringify(cartDetails)
-    })
-    const data = await response.json()
-    console.log(data)
-    const result = await redirectToCheckout(data.id)
-    if(result?.error){
-      console.log(result)
-    }
-    setIsLoading(false)
-  }
-
   const totalAmount =totalPrice&& totalPrice+ shippingAmount;
 
-
+  const cartItems = Object.entries(cartDetails!).map(([_, product])=>product)
 
   return (
     <section
@@ -60,15 +47,11 @@ const isDisabled = isLoading || cartCount! ===0
       </dl>
 
       <div className="mt-6 flex flex-col gap-5">
-        <Button className="w-full" disabled={isDisabled} onClick={onCheckout}>
-
-          {isLoading&& <Loader2 className="mr-2 h-4 w-4 animate-spin" 
-          />}
-          Checkout
-        </Button>
-
-        <p>or</p>
-        <p>contact us at <span className="font-bold">123123123</span> for delivery on cash </p>
+        
+        
+          <FormDialog  item={cartItems}/>
+        
+        
       </div>
       
     </section>
