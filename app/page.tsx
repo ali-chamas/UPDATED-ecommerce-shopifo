@@ -54,7 +54,7 @@ export default async function Page({searchParams}:Props) {
       "slug": slug.current
     }`,
     config: {
-      cache: 'force-cache',
+      cache: 'no-cache',
       next: { revalidate: 10 }
     }
   });
