@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { ProductFilters } from "@/components/product-filters"
 import { ProductGrid } from "@/components/product-grid"
 import { ProductSort } from "@/components/product-sort"
+import { revalidatePath } from "next/cache"
 
 
 interface Props {
@@ -40,17 +41,24 @@ export default async function Page({searchParams}:Props) {
 
 
 
-  const products = await client.fetch<SanityProduct[]>(groq` ${filter} ${order}{
-    _id,
-    _createdAt,
-    name,
-    sku,
-    images,
-    currency,
-    price,
-    description,
-    "slug": slug.current
-  }`);
+  const products = await client.fetch<SanityProduct[]>({
+    query:groq` ${filter} ${order}{
+      _id,
+      _createdAt,
+      name,
+      sku,
+      images,
+      currency,
+      price,
+      description,
+      "slug": slug.current
+    }`,
+    config: {
+      cache: 'force-cache',
+      next: { revalidate: 10 }
+    }
+  });
+  
 
  
   return (

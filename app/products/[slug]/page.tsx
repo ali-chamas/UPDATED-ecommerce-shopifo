@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default async function Page({params}:Props) {
-const product=await client.fetch<SanityProduct>(groq`*[_type == "product" && slug.current == "${params.slug}"][0]{
+const product=await client.fetch<SanityProduct>({query:groq`*[_type == "product" && slug.current == "${params.slug}"][0]{
   _id,
   _createdAt,
   "id":_id,
@@ -26,7 +26,10 @@ const product=await client.fetch<SanityProduct>(groq`*[_type == "product" && slu
   categories,
   colors,
   "slug":slug.current
-}`)
+}`,config: {
+  cache: 'force-cache',
+  next: { revalidate: 10 }
+}})
 
   return (
     <main className="mx-auto max-w-5xl sm:px-6 sm:pt-16 lg:px-8">
