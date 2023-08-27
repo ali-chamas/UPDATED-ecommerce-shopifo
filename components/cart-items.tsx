@@ -56,7 +56,7 @@ export function CartItems() {
                 <div className="flex justify-between">
                   <h3 className="text-sm">
                     <Link href={`/products/${product.slug}`} className="font-medium">
-                      name
+                      {product.name}
                     </Link>
                   </h3>
                 </div>
@@ -78,7 +78,7 @@ export function CartItems() {
                   className="w-16"
                   min={1}
                   max={10}
-                  value={product.quantity}
+                  defaultValue={product.quantity}
                   onChange={event=>setItemQuantity(product._id,Number(event.target.value))}
                 />
                 <div className="absolute right-0 top-0">
