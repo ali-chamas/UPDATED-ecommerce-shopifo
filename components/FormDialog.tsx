@@ -43,7 +43,7 @@ let temple=''
     let finalTotal = 0;
     item.item.map((items:any,index:number)=>{
 
-        temple=temple +'\n'+ ('item : '+ Number(index+1)+'\n'+'name : '+ items.name+'\nslug : '+items.slug+'\nprice : '+formatCurrencyString({  value:items.price,currency:"USD"})+'\nquantity: '+items.quantity+'\ntotal price :'+formatCurrencyString({  value:items.value,currency:"USD"}))+'\n\n\n'
+        temple=temple +'\n'+ ('item : '+ Number(index+1)+'\n'+'name : '+ items.name+'\nslug : '+items.slug+'\nprice : '+formatCurrencyString({  value:items.price,currency:"USD"})+'\nquantity: '+items.quantity+'\nsize: '+items.size+'\ntotal price :'+formatCurrencyString({  value:items.value,currency:"USD"}))+'\n\n\n'
 
         finalTotal=finalTotal+Number(items.value);
     })
@@ -61,7 +61,7 @@ let temple=''
   const handleClose = () => {
     // setOpen(false);
     setOpen(false)
-    console.log(temple)
+    
     setError(false)
   };
   const handleCheckout=()=>{
@@ -78,7 +78,7 @@ let temple=''
           });
           setOpen(false)
           clearCart()
-          router.push('http://localhost:3000/success')
+          router.push('/success')
     }
   }
 

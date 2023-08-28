@@ -13,9 +13,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import { CartItemsEmpty } from "@/components/cart-items-empty"
+import { useState } from "react"
 
 
 export function CartItems() {
+
+  
 
   const {cartDetails,setItemQuantity,removeItem} = useShoppingCart()
   const cartItems = Object.entries(cartDetails!).map(([_, product])=>product)
@@ -30,14 +33,16 @@ export function CartItems() {
   }
 
   if(cartItems.length===0)return <CartItemsEmpty/>
-
+  
   return (
     <ul
       role="list"
       className="divide-y divide-gray-200 border-y border-gray-200 dark:divide-gray-500 dark:border-gray-500"
     >
-      {cartItems.map((product, productIdx) => (
-        <li key={"key"} className="flex py-6 sm:py-10">
+      {cartItems.map((product, productIdx) =>  (
+        
+        <li key={product.id} className="flex py-6 sm:py-10" >
+          
           <div className="shrink-0">
             <Image
             placeholder="blur"
@@ -49,7 +54,7 @@ export function CartItems() {
               className="h-24 w-24 rounded-md border-2 border-gray-200 object-cover object-center dark:border-gray-800 sm:h-48 sm:w-48"
             />
           </div>
-
+          
           <div className="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
             <div className="relative justify-between pr-9 sm:flex sm:gap-x-6 sm:pr-0">
               <div>
@@ -71,16 +76,22 @@ export function CartItems() {
                 <label htmlFor={`quantity-${productIdx}`} className="sr-only">
                   Quantity, {product.name}
                 </label>
+                
+                
                 <Input
                   id={`quantity-${productIdx}`}
                   name={`quantity-${productIdx}`}
                   type="number"
-                  className="w-16"
+                  className="w-16 "
                   min={1}
-                  max={10}
-                  defaultValue={product.quantity}
+                  max={100}
+                  
+                  value={product.quantity}
                   onChange={event=>setItemQuantity(product._id,Number(event.target.value))}
                 />
+                
+                
+                
                 <div className="absolute right-0 top-0">
                   <Button
                     variant="ghost"
