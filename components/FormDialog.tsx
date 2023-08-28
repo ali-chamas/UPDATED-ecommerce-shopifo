@@ -1,5 +1,5 @@
 'use client'
-import  React,{useState} from 'react';
+import  React,{useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 
 import Dialog from '@mui/material/Dialog';
@@ -26,16 +26,17 @@ export default function FormDialog(item:any) {
     
 
 
-    const validateForm=()=>{
-        if( name=='' || email==='' || phone==='' ||address==='' || country===''){
-            setError(true)
-        }
-        
-    }
+ 
+ 
+
+
+   
     
   const handleClickOpen = () => {
     setOpen(true);
+    
   };
+
 let temple=''
 
 
@@ -43,7 +44,7 @@ let temple=''
     let finalTotal = 0;
     item.item.map((items:any,index:number)=>{
 
-        temple=temple +'\n'+ ('item : '+ Number(index+1)+'\n'+'name : '+ items.name+'\nslug : '+items.slug+'\nprice : '+formatCurrencyString({  value:items.price,currency:"USD"})+'\nquantity: '+items.quantity+'\nsize: '+items.size+'\ntotal price :'+formatCurrencyString({  value:items.value,currency:"USD"}))+'\n\n\n'
+        temple=temple +'\n'+ ('item : '+ Number(index+1)+'\n'+'name : '+ items.name+'\nslug : '+items.slug+'\nprice : '+formatCurrencyString({  value:items.price,currency:"USD"})+'\nquantity: '+items.quantity+'\nsize: '+items.sizes+'\ntotal price :'+formatCurrencyString({  value:items.value,currency:"USD"}))+'\n\n\n'
 
         finalTotal=finalTotal+Number(items.value);
     })
@@ -62,12 +63,15 @@ let temple=''
     // setOpen(false);
     setOpen(false)
     
-    setError(false)
+   
   };
+
   const handleCheckout=()=>{
     
-    validateForm()
-    if (!error){
+    if( name=='' || email==='' || phone==='' ||address==='' || country===''){
+            setError(true)
+      }
+      else{
         orders()
 
         emailjs.send('service_ja4bd6s', 'template_kk3f5i7',{name,email,country,phone,address,temple}, 'jPKq67PTMwgsrhaHv')
@@ -79,7 +83,9 @@ let temple=''
           setOpen(false)
           clearCart()
           router.push('/success')
-    }
+       setError(false)
+      }
+    
   }
 
   return (

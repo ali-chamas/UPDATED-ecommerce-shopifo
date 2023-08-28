@@ -11,7 +11,7 @@ import FormDialog from "./FormDialog";
 export function CartSummary() {
   const {formattedTotalPrice,totalPrice,cartDetails,cartCount,redirectToCheckout}=useShoppingCart()
 
-  const shippingAmount=cartCount!>0?500:0
+  const shippingAmount=cartCount!>0?200:0
 
 const [isLoading,setIsLoading]=useState(false)
 const isDisabled = isLoading || cartCount! ===0

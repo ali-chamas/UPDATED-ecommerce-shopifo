@@ -20,7 +20,7 @@ export function CartItems() {
 
   
 
-  const {cartDetails,setItemQuantity,removeItem} = useShoppingCart()
+  const {cartDetails,setItemQuantity,removeItem,decrementItem,incrementItem} = useShoppingCart()
   const cartItems = Object.entries(cartDetails!).map(([_, product])=>product)
   const {toast}=useToast()
   function removeCartItem(product:Product) {
@@ -76,21 +76,34 @@ export function CartItems() {
                 <label htmlFor={`quantity-${productIdx}`} className="sr-only">
                   Quantity, {product.name}
                 </label>
+                <div className="flex gap-2 items-center ">
                 
-                
+                <button type="button" className="inline-flex p-1  hover:opacity-80 text-2xl font-bold" onClick={()=>decrementItem(product._id)}>
+              -
+                </button>
+
                 <Input
                   id={`quantity-${productIdx}`}
                   name={`quantity-${productIdx}`}
-                  type="number"
-                  className="w-16 "
+                  type="text"
+                  disabled
+                  
+                  className="text-center w-1/3"
                   min={1}
                   max={100}
                   
                   value={product.quantity}
-                  onChange={event=>setItemQuantity(product._id,Number(event.target.value))}
+                  onChange={event=>(
+                    
+                    setItemQuantity(product._id,Number(event.target.value)))}
                 />
+                <button type="button"  className="inline-flex p-1  hover:opacity-80 text-xl font-bold" onClick={()=>incrementItem(product._id)}>
+              +
+                </button>
+
+
                 
-                
+                </div>
                 
                 <div className="absolute right-0 top-0">
                   <Button
